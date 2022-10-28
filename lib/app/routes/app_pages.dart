@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:hotel_app/app/modules/authpages/bindings/bindings.dart';
 import 'package:hotel_app/app/modules/authpages/view/phone_auth.dart';
+import 'package:hotel_app/app/modules/otp_view/bindings/bindings.dart';
+import 'package:hotel_app/app/modules/otp_view/view/view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: Routes.AUTH_PAGES,
       page: () => const PhoneAuthView(),
       binding: AuthPageBindings(),
+    ),
+    GetPage(
+      name: Routes.OTP_VIEW,
+      page: () => const OtpView(),
+      binding: OtpBindings(),
     ),
   ];
 }
