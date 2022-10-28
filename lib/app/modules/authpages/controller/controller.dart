@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,14 +12,14 @@ import 'package:hotel_app/app/routes/app_pages.dart';
 
 class AuthPagesController extends GetxController {
   int start = 40;
-  bool wait = false.obs();
+  var wait = false.obs;
   String buttonName = "Send";
   TextEditingController phoneController = TextEditingController();
   TextEditingController otpController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String hash = "";
-  bool isloading = false.obs();
-  bool isTimesUp = false.obs();
+  var isloading = false.obs;
+  var isTimesUp = false.obs;
   Timer? timer;
   String verificationIdFinal = "";
   String smsCode = "";
@@ -32,8 +33,7 @@ class AuthPagesController extends GetxController {
   @override
   void onClose() {
     phoneController.dispose();
-    otpController.clear();
-
+    // otpController.clear();
     super.onClose();
   }
 
@@ -41,10 +41,10 @@ class AuthPagesController extends GetxController {
     const oneSec = Duration(seconds: 1);
     timer = Timer.periodic(oneSec, (timer) {
       if (start == 0) {
-        isTimesUp = true.obs();
+        isTimesUp.value = true.obs();
         timer.cancel();
         buttonName = "Resend";
-        wait = false.obs();
+        wait.value = false.obs();
         start = 40;
       } else {
         start--;
@@ -56,7 +56,7 @@ class AuthPagesController extends GetxController {
   // this function is used to send otp to the user
   Future<void> onGetOtpButton() async {
     if (formKey.currentState!.validate()) {
-      isloading = true.obs();
+      isloading.value = true;
       final phoneNumber = phoneController.text.trim();
       final data = PhoneNumberModel(phoneNumber: phoneNumber);
       PhoneNumberResponseModel? response =
@@ -67,7 +67,8 @@ class AuthPagesController extends GetxController {
         return;
       } else if (response.success == true) {
         hash = response.hash ?? '';
-        Get.offNamed(Routes.OTP_VIEW);
+
+        Get.toNamed(Routes.OTP_VIEW);
         isLoadingFalse();
       } else {
         Get.snackbar("Error", response.message ?? "Something went wrong");
@@ -79,7 +80,7 @@ class AuthPagesController extends GetxController {
 
   // make isloading false
   void isLoadingFalse() {
-    isloading = false.obs();
+    isloading.value = false.obs();
   }
 
   // validate mobile number
@@ -95,8 +96,9 @@ class AuthPagesController extends GetxController {
   }
 
   Future<void> onOtpVerifyButton() async {
-    isloading = true.obs();
+    isloading.value = true.obs();
     final otp = otpController.text.trim();
+    log('========$hash ,$otp');
     final data = OtpModel(hash: hash, otp: otp);
     OtpResponseModel? otpResponse = await PhoneNumberService().otpverify(data);
     if (otpResponse == null) {

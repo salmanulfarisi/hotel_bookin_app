@@ -10,6 +10,7 @@ abstract class Routes {
   static const WELCOME_VIEW = _Paths.WELCOME_VIEW;
   static const AUTH_PAGES = _Paths.PHONE_AUTH;
   static const OTP_VIEW = _Paths.OTP_VIEW;
+  static const LOGIN = _Paths.LOGIN;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const WELCOME_VIEW = '/welcome-view';
   static const PHONE_AUTH = '/phone-auth';
   static const OTP_VIEW = '/otp-view';
+  static const LOGIN = '/login';
 }

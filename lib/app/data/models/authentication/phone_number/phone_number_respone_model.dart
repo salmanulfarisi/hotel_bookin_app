@@ -6,7 +6,7 @@ class PhoneNumberResponseModel {
   });
 
   final bool? success;
-  final String? hash;
+  String? hash;
   final String? message;
 
   factory PhoneNumberResponseModel.fromJson(Map<String, dynamic> json) =>
