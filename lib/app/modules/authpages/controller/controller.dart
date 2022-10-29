@@ -69,6 +69,7 @@ class AuthPagesController extends GetxController {
         hash = response.hash ?? '';
 
         Get.toNamed(Routes.OTP_VIEW);
+
         isLoadingFalse();
       } else {
         Get.snackbar("Error", response.message ?? "Something went wrong");
@@ -108,6 +109,7 @@ class AuthPagesController extends GetxController {
     } else if (otpResponse.created == true) {
       isLoadingFalse();
       Get.snackbar('Success', otpResponse.message ?? "Something went wrong");
+      Get.offNamed(Routes.LOGIN);
     } else {
       Get.snackbar('Error', otpResponse.message ?? "Something went wrong");
       isLoadingFalse();

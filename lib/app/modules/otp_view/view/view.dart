@@ -46,7 +46,30 @@ class OtpView extends GetView<AuthPagesController> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "OTP sent to ${controller.phoneController.text}",
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Get.back();
+                            controller.phoneController.clear();
+                          },
+                          child: const Text(
+                            "Change",
+                            style: TextStyle(color: Colors.blue),
+                          ))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   Row(
                     children: [
