@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hotel_app/app/core/app_theme.dart';
 import 'package:hotel_app/app/core/widget/textfield_widget.dart';
 import 'package:hotel_app/app/modules/authpages/controller/controller.dart';
+import 'package:hotel_app/app/routes/app_pages.dart';
 
 class PhoneAuthView extends GetView<AuthPagesController> {
   const PhoneAuthView({Key? key}) : super(key: key);
@@ -49,6 +50,7 @@ class PhoneAuthView extends GetView<AuthPagesController> {
                         child: Form(
                           key: controller.formKey,
                           child: TextFieldWidget(
+                            icon: Icons.phone,
                             hintText: 'Enter your 10 digit mobile number',
                             controller: controller.phoneController,
                             validator: controller.phoneNumberValidator,
@@ -85,7 +87,27 @@ class PhoneAuthView extends GetView<AuthPagesController> {
                               ),
                             ),
                           ),
-                        )
+                        ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Already have an account ?"),
+                      GestureDetector(
+                        onTap: () {
+                          Get.offAllNamed(Routes.LOGIN);
+                        },
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 17, 0),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),

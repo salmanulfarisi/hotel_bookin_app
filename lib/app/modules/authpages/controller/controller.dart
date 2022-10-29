@@ -109,7 +109,7 @@ class AuthPagesController extends GetxController {
     } else if (otpResponse.created == true) {
       isLoadingFalse();
       Get.snackbar('Success', otpResponse.message ?? "Something went wrong");
-      Get.offNamed(Routes.LOGIN);
+      Get.toNamed(Routes.SIGNUP, arguments: phoneController.text);
     } else {
       Get.snackbar('Error', otpResponse.message ?? "Something went wrong");
       isLoadingFalse();

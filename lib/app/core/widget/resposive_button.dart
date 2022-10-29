@@ -1,17 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_app/app/core/widget/app_text.dart';
 
 class ResponsiveButton extends StatelessWidget {
   bool? isResponsive;
   double? width;
-  String? text;
-  IconData? icon;
-  ResponsiveButton(
-      {Key? key,
-      this.width = 120,
-      this.isResponsive = false,
-      this.text,
-      this.icon})
+  ResponsiveButton({Key? key, this.width = 120, this.isResponsive = false})
       : super(key: key);
 
   @override
@@ -26,17 +20,16 @@ class ResponsiveButton extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: isResponsive == true
-              ? MainAxisAlignment.center
-              : MainAxisAlignment.spaceEvenly,
+              ? MainAxisAlignment.spaceEvenly
+              : MainAxisAlignment.center,
           children: [
             isResponsive == true
                 ? AppText(
-                    text: text ?? '',
+                    text: "Book Trip Now",
                     color: Colors.white,
-                    size: 18,
                   )
                 : Container(),
-            Icon(icon, color: Colors.white),
+            const Icon(CupertinoIcons.arrow_right, color: Colors.white),
           ],
         ),
       ),

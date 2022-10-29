@@ -5,11 +5,13 @@ class TextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final TextInputType keyType;
-  const TextFieldWidget({
+  IconData? icon;
+  TextFieldWidget({
     Key? key,
     required this.hintText,
     required this.controller,
     required this.validator,
+    this.icon,
     this.keyType = TextInputType.emailAddress,
   }) : super(key: key);
 
@@ -19,13 +21,16 @@ class TextFieldWidget extends StatelessWidget {
       controller: controller,
       validator: validator,
       decoration: InputDecoration(
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
         ),
         fillColor: Colors.white,
         filled: true,
         hintText: hintText,
         hintStyle: const TextStyle(color: Colors.grey),
+        prefixIcon: Icon(icon, color: const Color.fromARGB(255, 255, 17, 0)),
       ),
       keyboardType: keyType,
       style: const TextStyle(),

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hotel_app/app/core/widget/textfield_widget.dart';
-import 'package:hotel_app/app/modules/login/views/widget/dividertext.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/signup_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends GetView<SignupController> {
+  const SignupView({Key? key, required this.phone}) : super(key: key);
+  final String phone;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(
           child: Form(
-            key: controller.loginFormKey,
+            key: controller.signupFormKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +26,7 @@ class LoginView extends GetView<LoginController> {
                   height: 200,
                 ),
                 const Text(
-                  'Login to your Account',
+                  'Create your Account',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
@@ -37,8 +37,19 @@ class LoginView extends GetView<LoginController> {
                   height: 20,
                 ),
                 TextFieldWidget(
-                  hintText: 'E-mail',
-                  icon: Icons.mail,
+                  hintText: 'enter your name',
+                  icon: Icons.person,
+                  controller: controller.nameController,
+                  validator: (value) {
+                    return controller.nameValidator(value);
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFieldWidget(
+                  hintText: 'Enter Email',
+                  icon: Icons.email,
                   controller: controller.emailController,
                   validator: (value) {
                     return controller.validateEmail(value!);
@@ -50,8 +61,6 @@ class LoginView extends GetView<LoginController> {
                 Obx(
                   () => TextFormField(
                     obscureText: controller.isPasswordHidden.value,
-                    keyboardType: TextInputType.visiblePassword,
-                    autofillHints: const [AutofillHints.email],
                     controller: controller.passwordController,
                     onSaved: (value) {
                       controller.password = value!;
@@ -64,8 +73,8 @@ class LoginView extends GetView<LoginController> {
                         // labelStyle: labelStyle,
                         hintText: 'Password',
                         // hintStyle: labelStyle,
-                        prefixIcon:
-                            const Icon(Icons.fingerprint, color: Colors.red),
+                        prefixIcon: const Icon(Icons.fingerprint,
+                            color: Color.fromARGB(255, 255, 17, 0)),
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 10),
                         border: OutlineInputBorder(
@@ -81,16 +90,42 @@ class LoginView extends GetView<LoginController> {
                                   ? Icons.visibility
                                   : Icons.visibility_off,
                               color: controller.isPasswordHidden.value
-                                  ? Colors.black
+                                  ? const Color.fromARGB(255, 255, 0, 0)
                                   : Colors.grey,
                             ))),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: controller.confirmPasswordController,
+                  obscureText: controller.isPasswordHidden.value,
+                  onSaved: (value) {
+                    controller.confirm = value!;
+                  },
+                  validator: (value) {
+                    return controller.passwordConfirm();
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Confirm password',
+                    // labelStyle: labelStyle,
+                    hintText: 'Confirm password',
+                    // hintStyle: labelStyle,
+                    prefixIcon: const Icon(Icons.fingerprint,
+                        color: Color.fromARGB(255, 255, 17, 0)),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
                 ),
                 Row(
                   children: [
                     Obx(
                       () => Checkbox(
-                          fillColor: MaterialStateProperty.all(Colors.black),
+                          fillColor: MaterialStateProperty.all(Colors.red),
                           value: controller.ckeckBool.value,
                           onChanged: (value) {
                             controller.ckeckBool.value =
@@ -98,23 +133,15 @@ class LoginView extends GetView<LoginController> {
                           }),
                     ),
                     const Text('Remember Me'),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Text(
-                        'Forget Password ?',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 17, 0),
-                        ),
-                      ),
-                    )
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    controller.onSignUpButton(phone);
+                  },
                   child: Container(
                     height: 50,
                     width: MediaQuery.of(context).size.width - 60,
@@ -123,7 +150,7 @@ class LoginView extends GetView<LoginController> {
                         borderRadius: BorderRadius.circular(15)),
                     child: const Center(
                       child: Text(
-                        "Login",
+                        "Sign Up",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -132,22 +159,26 @@ class LoginView extends GetView<LoginController> {
                     ),
                   ),
                 ),
-                const OrWidget(),
                 const SizedBox(
                   height: 20,
                 ),
+                // const OrWidget(),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.center,
                 //   children: [
-                //     const Text("Don't have an Account?"),
+                //     const Text("Already have a Account?"),
+                //     const SizedBox(
+                //       width: 10,
+                //     ),
                 //     GestureDetector(
                 //       onTap: () {
-                //         Get.offAllNamed(Routes.SIGNUP);
+                //         Get.offAllNamed(Routes.LOGIN);
                 //       },
                 //       child: const Text(
-                //         'Sign Up',
+                //         'Sign In',
                 //         style: TextStyle(
                 //           color: Color.fromARGB(255, 255, 17, 0),
+                //           fontWeight: FontWeight.bold,
                 //         ),
                 //       ),
                 //     )
