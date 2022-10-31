@@ -30,7 +30,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
-  fancy_bottom_navigation: 
+  fancy_bottom_navigation: null
   flutter:
     sdk: flutter
   flutter_rating_bar: ^4.0.1
@@ -41,8 +41,10 @@ dependencies:
   internet_connection_checker: null
   intl: ^0.17.0
   pin_code_fields: ^7.4.0
+  shrink_sidemenu: ^2.0.0+2-null-safety
   sms_autofill: ^2.2.0
   timer_count_down: ^2.2.1
+  animations: ^2.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

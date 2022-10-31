@@ -146,7 +146,7 @@ class SignupView extends GetView<SignupController> {
                     height: 50,
                     width: MediaQuery.of(context).size.width - 60,
                     decoration: BoxDecoration(
-                        color: const Color(0xffff9601),
+                        color: const Color(0xff132137),
                         borderRadius: BorderRadius.circular(15)),
                     child: Obx(() => Center(
                           child: controller.isloading.value

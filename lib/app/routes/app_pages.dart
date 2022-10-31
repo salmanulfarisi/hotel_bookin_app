@@ -7,6 +7,8 @@ import 'package:hotel_app/app/modules/navigation/bindings/navigation_binding.dar
 import 'package:hotel_app/app/modules/navigation/views/navigation_view.dart';
 import 'package:hotel_app/app/modules/otp_view/bindings/bindings.dart';
 import 'package:hotel_app/app/modules/otp_view/view/view.dart';
+import 'package:hotel_app/app/modules/profile/bindings/profile_binding.dart';
+import 'package:hotel_app/app/modules/profile/views/profile_view.dart';
 import 'package:hotel_app/app/modules/signup/bindings/signup_binding.dart';
 import 'package:hotel_app/app/modules/signup/views/signup_view.dart';
 
@@ -48,11 +50,14 @@ class AppPages {
     GetPage(
       name: Routes.OTP_VIEW,
       page: () => const OtpView(),
+      transition: Transition.zoom,
+      transitionDuration: const Duration(milliseconds: 3000),
       binding: OtpBindings(),
     ),
     GetPage(
       name: _Paths.LOGIN,
       page: () => const LoginView(),
+      transition: Transition.zoom,
       binding: LoginBinding(),
     ),
     GetPage(
@@ -66,6 +71,11 @@ class AppPages {
       name: _Paths.NAVIGATION,
       page: () => const NavigationView(),
       binding: NavigationBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

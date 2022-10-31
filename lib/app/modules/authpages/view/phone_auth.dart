@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:hotel_app/app/core/app_theme.dart';
 import 'package:hotel_app/app/core/widget/textfield_widget.dart';
 import 'package:hotel_app/app/modules/authpages/controller/controller.dart';
-import 'package:hotel_app/app/routes/app_pages.dart';
 
 class PhoneAuthView extends GetView<AuthPagesController> {
   const PhoneAuthView({Key? key}) : super(key: key);
@@ -75,7 +74,7 @@ class PhoneAuthView extends GetView<AuthPagesController> {
                               height: 50,
                               width: MediaQuery.of(context).size.width - 60,
                               decoration: BoxDecoration(
-                                  color: const Color(0xffff9601),
+                                  color: const Color(0xff132137),
                                   borderRadius: BorderRadius.circular(15)),
                               child: Obx(
                                 () => Center(
@@ -84,7 +83,7 @@ class PhoneAuthView extends GetView<AuthPagesController> {
                                       : const Text(
                                           "Send the code",
                                           style: TextStyle(
-                                              color: Colors.black,
+                                              color: Colors.white,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -94,23 +93,23 @@ class PhoneAuthView extends GetView<AuthPagesController> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Already have an account ?"),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(Routes.LOGIN);
-                        },
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 255, 17, 0),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     const Text("Already have an account ?"),
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         Get.toNamed(Routes.LOGIN);
+                  //       },
+                  //       child: const Text(
+                  //         'Login',
+                  //         style: TextStyle(
+                  //           color: Color.fromARGB(255, 255, 17, 0),
+                  //         ),
+                  //       ),
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
             ),

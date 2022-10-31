@@ -1,19 +1,21 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 class NavigationController extends GetxController {
-  late PageController pageController;
-  var currentIndex = 0.obs;
-  GlobalKey bottomNavigationKey = GlobalKey();
-  @override
-  void onInit() {
-    super.onInit();
-    pageController = PageController();
+  final GlobalKey<SideMenuState> sideMenuKey = GlobalKey<SideMenuState>();
+  final tabIndex = 0.obs;
+
+  void changeTab(int index) {
+    tabIndex.value = index;
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    pageController.dispose();
+  void openClosedSideMenu() {
+    final state = sideMenuKey.currentState!;
+    if (state.isOpened) {
+      state.closeSideMenu();
+    } else {
+      state.openSideMenu();
+    }
   }
 }
