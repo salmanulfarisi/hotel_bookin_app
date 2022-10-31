@@ -148,15 +148,17 @@ class SignupView extends GetView<SignupController> {
                     decoration: BoxDecoration(
                         color: const Color(0xffff9601),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    child: Obx(() => Center(
+                          child: controller.isloading.value
+                              ? const CircularProgressIndicator()
+                              : const Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                        )),
                   ),
                 ),
                 const SizedBox(

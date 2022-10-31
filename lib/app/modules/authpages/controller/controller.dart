@@ -18,7 +18,7 @@ class AuthPagesController extends GetxController {
   TextEditingController otpController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String hash = "";
-  var isloading = false.obs;
+  RxBool isloading = false.obs;
   var isTimesUp = false.obs;
   Timer? timer;
   String verificationIdFinal = "";

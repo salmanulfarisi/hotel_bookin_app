@@ -12,6 +12,7 @@ abstract class Routes {
   static const OTP_VIEW = _Paths.OTP_VIEW;
   static const LOGIN = _Paths.LOGIN;
   static const SIGNUP = _Paths.SIGNUP;
+  static const NAVIGATION = _Paths.NAVIGATION;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const OTP_VIEW = '/otp-view';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
+  static const NAVIGATION = '/navigation';
 }

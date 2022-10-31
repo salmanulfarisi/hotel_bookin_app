@@ -9,6 +9,7 @@ class SignupController extends GetxController {
   var isPasswordHidden = true.obs;
   var ckeckBool = false.obs;
   var isAPIcallProcess = false.obs;
+  RxBool isloading = false.obs;
   final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
   late TextEditingController emailController,
       nameController,
@@ -78,6 +79,7 @@ class SignupController extends GetxController {
 
   Future<void> onSignUpButton(String phoneNum) async {
     if (signupFormKey.currentState!.validate()) {
+      isloading.value = true;
       final obj = SignupModel(
         name: nameController.text.trim(),
         email: emailController.text,
@@ -87,9 +89,12 @@ class SignupController extends GetxController {
       SignupResponseModel? response = await SignUpService().signUpService(obj);
       if (response == null) {
         Get.snackbar('Error', 'No Response');
+        isloading.value = false;
+        return;
       } else if (response.created == true) {
         Get.snackbar('Success', 'Account Created');
-        Get.offAllNamed(Routes.HOME);
+        Get.offAllNamed(Routes.NAVIGATION);
+        isloading.value = false;
       } else {
         Get.snackbar('Error', "$response.message");
         return;

@@ -30,6 +30,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
+  fancy_bottom_navigation: 
   flutter:
     sdk: flutter
   flutter_rating_bar: ^4.0.1

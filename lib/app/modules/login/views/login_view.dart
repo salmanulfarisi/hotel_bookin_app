@@ -39,7 +39,7 @@ class LoginView extends GetView<LoginController> {
                 TextFieldWidget(
                   hintText: 'E-mail',
                   icon: Icons.mail,
-                  controller: controller.emailController,
+                  controller: controller.phoneOrEmailController,
                   validator: (value) {
                     return controller.validateEmail(value!);
                   },
@@ -114,45 +114,35 @@ class LoginView extends GetView<LoginController> {
                   height: 20,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    controller.onLoginButton();
+                  },
                   child: Container(
                     height: 50,
                     width: MediaQuery.of(context).size.width - 60,
                     decoration: BoxDecoration(
                         color: const Color(0xffff9601),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    child: Obx(() => Center(
+                          child: controller.isloading.value
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                        )),
                   ),
                 ),
                 const OrWidget(),
                 const SizedBox(
                   height: 20,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     const Text("Don't have an Account?"),
-                //     GestureDetector(
-                //       onTap: () {
-                //         Get.offAllNamed(Routes.SIGNUP);
-                //       },
-                //       child: const Text(
-                //         'Sign Up',
-                //         style: TextStyle(
-                //           color: Color.fromARGB(255, 255, 17, 0),
-                //         ),
-                //       ),
-                //     )
-                //   ],
-                // )
               ],
             ),
           ),

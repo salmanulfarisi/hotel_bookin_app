@@ -12,12 +12,7 @@ class LoginResponseModel {
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       LoginResponseModel(
         message: json["message"] ?? "",
-        created: json["created"] ?? false,
+        created: json["created"],
         jwtKey: json["jwt_key"] ?? "",
       );
-
-  Map<String, dynamic> toJson() => {
-        "created": created,
-        "jwt_key": jwtKey,
-      };
 }

@@ -72,21 +72,24 @@ class PhoneAuthView extends GetView<AuthPagesController> {
                             }
                           },
                           child: Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width - 60,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffff9601),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: const Center(
-                              child: Text(
-                                "Send the code",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
+                              height: 50,
+                              width: MediaQuery.of(context).size.width - 60,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xffff9601),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Obx(
+                                () => Center(
+                                  child: controller.isloading.value
+                                      ? const CircularProgressIndicator()
+                                      : const Text(
+                                          "Send the code",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                ),
+                              )),
                         ),
                   const SizedBox(
                     height: 20,
@@ -97,7 +100,7 @@ class PhoneAuthView extends GetView<AuthPagesController> {
                       const Text("Already have an account ?"),
                       GestureDetector(
                         onTap: () {
-                          Get.offAllNamed(Routes.LOGIN);
+                          Get.toNamed(Routes.LOGIN);
                         },
                         child: const Text(
                           'Login',
