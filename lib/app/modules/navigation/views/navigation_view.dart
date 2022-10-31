@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hotel_app/app/core/widget/appbar.dart';
 import 'package:hotel_app/app/modules/home/views/home_view.dart';
 import 'package:hotel_app/app/modules/navigation/views/widgets/buildmenu_drawer.dart';
 import 'package:hotel_app/app/modules/profile/views/profile_view.dart';
@@ -16,86 +17,33 @@ class NavigationView extends GetView<NavigationController> {
       type: SideMenuType.slideNRotate,
       menu: buildMenu(),
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-              onPressed: () {
-                controller.openClosedSideMenu();
-              },
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.grey,
-              )),
-        ),
-        body: Obx(
-          () => IndexedStack(
-            index: controller.tabIndex.value,
-            children: [
-              const HomeView(),
-              SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Profile',
-                        style: TextStyle(fontSize: 30),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          controller.changeTab(0);
-                        },
-                        child: const Text('Go to Home'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          controller.changeTab(2);
-                        },
-                        child: const Text('Go to Settings'),
-                      ),
-                    ],
-                  ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0,
+        //   leading: IconButton(
+        //       onPressed: () {
+        //         controller.openClosedSideMenu();
+        //       },
+        //       icon: const Icon(
+        //         Icons.menu,
+        //         color: Colors.grey,
+        //       )),
+        // ),
+        body: Column(
+          children: [
+            getAppBarUI(context),
+            Expanded(
+              child: Obx(
+                () => IndexedStack(
+                  index: controller.tabIndex.value,
+                  children: const [
+                    HomeView(),
+                    ProfileView(),
+                  ],
                 ),
               ),
-              SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Settings',
-                        style: TextStyle(fontSize: 30),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          controller.changeTab(0);
-                        },
-                        child: const Text('Go to Home'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          controller.changeTab(1);
-                        },
-                        child: const Text('Go to Profile'),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const ProfileView()
-            ],
-          ),
+            ),
+          ],
         ),
         bottomNavigationBar: Theme(
           data: ThemeData(

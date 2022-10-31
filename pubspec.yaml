@@ -28,8 +28,10 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animated_text_kit: ^4.2.2
+  animations: ^2.0.3
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
+  dots_indicator: ^2.1.0
   fancy_bottom_navigation: null
   flutter:
     sdk: flutter
@@ -44,7 +46,6 @@ dependencies:
   shrink_sidemenu: ^2.0.0+2-null-safety
   sms_autofill: ^2.2.0
   timer_count_down: ^2.2.1
-  animations: ^2.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0
