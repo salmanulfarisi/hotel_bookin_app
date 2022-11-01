@@ -98,7 +98,7 @@ class OnboardPage2 extends StatelessWidget {
                 child: SlideTransition(
                   position: relaxSecondHalfAnimation,
                   child: const Text(
-                    "Care",
+                    "Title",
                     style:
                         TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
                   ),

@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_app/app/core/app_theme.dart';
 import 'package:hotel_app/app/data/models/model.dart';
-import 'package:hotel_app/app/modules/home/views/widgets/hotel_curosel.dart';
+import 'package:hotel_app/app/modules/home/controllers/home_controller.dart';
 import 'package:hotel_app/app/modules/home/views/widgets/hotel_listview.dart';
+import 'package:hotel_app/app/modules/home/views/widgets/searchbar.dart';
 
-import '../controllers/home_controller.dart';
+import '../controllers/search_page_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+class SearchPageView extends GetView<SearchPageController> {
+  const SearchPageView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     List<HotelListData> hotelList = HotelListData.hotelList;
     final controller = Get.put(HomeController());
     return Theme(
       data: HotelAppTheme.buildLightTheme(),
-      child: Container(
+      child: SafeArea(
         child: Scaffold(
+          appBar: AppBar(),
           body: Stack(
             children: [
               InkWell(
@@ -39,9 +41,8 @@ class HomeView extends GetView<HomeController> {
                               delegate: SliverChildBuilderDelegate(
                                 (context, index) {
                                   return Column(
-                                    children: const [
-                                      // getSearchBarUI(context),
-                                      SliderWidget(),
+                                    children: [
+                                      getSearchBarUI(context),
                                     ],
                                   );
                                 },

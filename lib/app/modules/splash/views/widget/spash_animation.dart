@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_app/app/core/extentions.dart';
 import 'package:hotel_app/app/modules/splash/controllers/splash_controller.dart';
+import 'package:hotel_app/app/routes/app_pages.dart';
 
 class SplashAnimation extends StatelessWidget {
   final AnimationController animationController;
@@ -60,7 +61,11 @@ class SplashAnimation extends StatelessWidget {
                   bottom: MediaQuery.of(context).padding.bottom + 16),
               child: InkWell(
                 onTap: () {
-                  controller.animationController.animateTo(0.2);
+                  if (controller.getStorage.read('token') != null) {
+                    Get.offAllNamed(Routes.NAVIGATION);
+                  } else {
+                    controller.animationController.animateTo(0.2);
+                  }
                 },
                 child: Container(
                   height: 58,

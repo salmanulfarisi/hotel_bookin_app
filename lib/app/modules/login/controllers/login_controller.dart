@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:hotel_app/app/data/models/authentication/login/login_model.dart';
 import 'package:hotel_app/app/data/models/authentication/login/login_response_model.dart';
 import 'package:hotel_app/app/data/services/register_service/login_service.dart';
 import 'package:hotel_app/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
+  final getStorage = GetStorage();
   var isPasswordHidden = true.obs;
   var ckeckBool = false.obs;
   var isAPIcallProcess = false.obs;
@@ -67,6 +69,7 @@ class LoginController extends GetxController {
         return;
       } else if (response.created == true) {
         Get.snackbar("Success", "Login Success");
+        getStorage.write("token", response.jwtKey);
         Get.offAllNamed(Routes.NAVIGATION);
         isloading.value = false;
       } else {

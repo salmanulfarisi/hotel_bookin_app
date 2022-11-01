@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_app/app/core/widget/appbar.dart';
+import 'package:hotel_app/app/modules/booking_page/views/booking_page_view.dart';
+import 'package:hotel_app/app/modules/favaroit_page/views/favaroit_page_view.dart';
 import 'package:hotel_app/app/modules/home/views/home_view.dart';
 import 'package:hotel_app/app/modules/navigation/views/widgets/buildmenu_drawer.dart';
 import 'package:hotel_app/app/modules/profile/views/profile_view.dart';
@@ -38,6 +40,8 @@ class NavigationView extends GetView<NavigationController> {
                   index: controller.tabIndex.value,
                   children: const [
                     HomeView(),
+                    BookingPageView(),
+                    FavaroitPageView(),
                     ProfileView(),
                   ],
                 ),
@@ -65,8 +69,8 @@ class NavigationView extends GetView<NavigationController> {
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.data_usage),
-                  label: 'Events',
+                  icon: Icon(Icons.card_travel),
+                  label: 'Booking',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.favorite),

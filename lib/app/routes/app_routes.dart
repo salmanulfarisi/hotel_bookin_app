@@ -14,6 +14,9 @@ abstract class Routes {
   static const SIGNUP = _Paths.SIGNUP;
   static const NAVIGATION = _Paths.NAVIGATION;
   static const PROFILE = _Paths.PROFILE;
+  static const BOOKING_PAGE = _Paths.BOOKING_PAGE;
+  static const FAVAROIT_PAGE = _Paths.FAVAROIT_PAGE;
+  static const SEARCH_PAGE = _Paths.SEARCH_PAGE;
 }
 
 abstract class _Paths {
@@ -27,4 +30,7 @@ abstract class _Paths {
   static const SIGNUP = '/signup';
   static const NAVIGATION = '/navigation';
   static const PROFILE = '/profile';
+  static const BOOKING_PAGE = '/booking-page';
+  static const FAVAROIT_PAGE = '/favaroit-page';
+  static const SEARCH_PAGE = '/search-page';
 }

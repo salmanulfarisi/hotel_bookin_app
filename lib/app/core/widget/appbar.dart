@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hotel_app/app/core/app_theme.dart';
 import 'package:hotel_app/app/modules/navigation/controllers/navigation_controller.dart';
+import 'package:hotel_app/app/routes/app_pages.dart';
 
 Widget getAppBarUI(BuildContext context) {
   final controller = Get.find<NavigationController>();
@@ -65,10 +66,12 @@ Widget getAppBarUI(BuildContext context) {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(32.0),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.SEARCH_PAGE);
+                    },
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.favorite_border),
+                      child: Icon(Icons.search),
                     ),
                   ),
                 ),
