@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hotel_app/app/core/app_theme.dart';
+import 'package:hotel_app/app/modules/home/controllers/home_controller.dart';
 import 'package:hotel_app/app/modules/navigation/controllers/navigation_controller.dart';
 import 'package:hotel_app/app/routes/app_pages.dart';
 
 Widget getAppBarUI(BuildContext context) {
   final controller = Get.find<NavigationController>();
+  final homeController = Get.put(HomeController());
   return Container(
     decoration: BoxDecoration(
       color: HotelAppTheme.buildLightTheme().backgroundColor,
@@ -81,7 +83,9 @@ Widget getAppBarUI(BuildContext context) {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(32.0),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      homeController.getAllRoom();
+                    },
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Icon(FontAwesomeIcons.locationDot),

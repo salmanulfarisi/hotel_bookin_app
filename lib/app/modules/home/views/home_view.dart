@@ -59,12 +59,11 @@ class HomeView extends GetView<HomeController> {
                           color:
                               HotelAppTheme.buildLightTheme().backgroundColor,
                           child: ListView.builder(
-                            itemCount: hotelList.length,
+                            itemCount: controller.allrooms.length,
                             padding: const EdgeInsets.only(top: 8),
                             scrollDirection: Axis.vertical,
                             itemBuilder: (BuildContext context, int index) {
-                              final int count =
-                                  hotelList.length > 10 ? 10 : hotelList.length;
+                              int count = controller.allrooms.length;
                               final Animation<double> animation = Tween<double>(
                                       begin: 0.0, end: 1.0)
                                   .animate(CurvedAnimation(
@@ -74,10 +73,11 @@ class HomeView extends GetView<HomeController> {
                               controller.animationController.forward();
                               return HotelListView(
                                 callback: () {},
-                                hotelData: hotelList[index],
+                                // hotelData: hotelList[index],
                                 animation: animation,
                                 animationController:
                                     controller.animationController,
+                                hotel: controller.allrooms[index],
                               );
                             },
                           ),

@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:hotel_app/app/core/app_theme.dart';
-import 'package:hotel_app/app/data/models/model.dart';
+import 'package:hotel_app/app/data/models/home/getallrooms.dart';
+import 'package:hotel_app/app/modules/home/controllers/home_controller.dart';
 
 class HotelListView extends StatelessWidget {
-  const HotelListView(
-      {Key? key,
-      this.hotelData,
-      this.animationController,
-      this.animation,
-      this.callback})
-      : super(key: key);
+  const HotelListView({
+    Key? key,
+    // this.hotelData,
+    this.animationController,
+    this.animation,
+    this.callback,
+    this.hotel,
+  }) : super(key: key);
 
   final VoidCallback? callback;
-  final HotelListData? hotelData;
+  // final HotelListData? hotelData;
   final AnimationController? animationController;
   final Animation<double>? animation;
+  final AllRoomsModel? hotel;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController());
     return AnimatedBuilder(
       animation: animationController!,
       builder: (BuildContext context, Widget? child) {
@@ -53,8 +58,9 @@ class HotelListView extends StatelessWidget {
                           children: <Widget>[
                             AspectRatio(
                               aspectRatio: 2,
-                              child: Image.asset(
-                                hotelData!.imagePath,
+                              child: Image(
+                                image:
+                                    NetworkImage(hotel!.images!.first[0].url!),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -77,7 +83,7 @@ class HotelListView extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              hotelData!.titleTxt,
+                                              hotel!.property!.propertyName!,
                                               textAlign: TextAlign.left,
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.w600,
@@ -91,7 +97,7 @@ class HotelListView extends StatelessWidget {
                                                   MainAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  hotelData!.subTxt,
+                                                  hotel!.roomName!,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       color: Colors.grey
@@ -109,7 +115,7 @@ class HotelListView extends StatelessWidget {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    '${hotelData!.dist.toStringAsFixed(1)} km to city',
+                                                    hotel!.property!.address!,
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
@@ -126,8 +132,7 @@ class HotelListView extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   RatingBar(
-                                                    initialRating:
-                                                        hotelData!.rating,
+                                                    initialRating: 4,
                                                     direction: Axis.horizontal,
                                                     allowHalfRating: true,
                                                     itemCount: 5,
@@ -160,7 +165,7 @@ class HotelListView extends StatelessWidget {
                                                     },
                                                   ),
                                                   Text(
-                                                    ' ${hotelData!.reviews} Reviews',
+                                                    ' 7 Reviews',
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         color: Colors.grey
@@ -183,12 +188,17 @@ class HotelListView extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: <Widget>[
-                                        Text(
-                                          '\$${hotelData!.perNight}',
-                                          textAlign: TextAlign.left,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 22,
+                                        InkWell(
+                                          onTap: () {
+                                            print(hotel!.roomName!);
+                                          },
+                                          child: Text(
+                                            '\$${hotel!.price}',
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 22,
+                                            ),
                                           ),
                                         ),
                                         Text(

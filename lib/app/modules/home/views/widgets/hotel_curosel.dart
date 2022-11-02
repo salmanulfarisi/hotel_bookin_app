@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hotel_app/app/data/models/home/getallrooms.dart';
 import 'package:hotel_app/app/modules/home/controllers/home_controller.dart';
 
 class SliderWidget extends StatefulWidget {
@@ -16,6 +17,7 @@ class _SliderWidgetState extends State<SliderWidget> {
   var currentPageValue = 0.0;
   double scaleFactor = 0.8;
   final double height = 22;
+  final AllRoomsModel? hotel = AllRoomsModel();
   @override
   void initState() {
     pageController.addListener(() {
@@ -42,7 +44,9 @@ class _SliderWidgetState extends State<SliderWidget> {
           height: MediaQuery.of(context).size.height * 0.3,
           child: PageView.builder(
               controller: pageController,
-              itemCount: 5,
+              itemCount: mainPageController.allrooms.length > 5
+                  ? 5
+                  : mainPageController.allrooms.length,
               itemBuilder: (context, position) {
                 return _buidPageItem(position);
               }),
@@ -90,18 +94,22 @@ class _SliderWidgetState extends State<SliderWidget> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: 220,
-            margin: const EdgeInsets.only(left: 10, right: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: index.isEven
-                  ? const Color(0xFF69c5df)
-                  : const Color(0xFF9294cc),
-              image: const DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  'assets/hotel_2.png',
+          InkWell(
+            onTap: () {
+              // print(hotel!.images!.first[index].url);
+            },
+            child: Container(
+              height: 220,
+              margin: const EdgeInsets.only(left: 10, right: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: index.isEven
+                    ? const Color(0xFF69c5df)
+                    : const Color(0xFF9294cc),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      mainPageController.allrooms[index].images!.first[0].url!),
                 ),
               ),
             ),

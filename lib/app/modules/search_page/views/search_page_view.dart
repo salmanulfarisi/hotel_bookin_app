@@ -75,7 +75,7 @@ class SearchPageView extends GetView<SearchPageController> {
                               controller.animationController.forward();
                               return HotelListView(
                                 callback: () {},
-                                hotelData: hotelList[index],
+                                // hotelData: hotelList[index],
                                 animation: animation,
                                 animationController:
                                     controller.animationController,
